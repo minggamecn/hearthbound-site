@@ -74,7 +74,7 @@ The homepage shows a "Coming soon to Google Play" badge (a plain `<span>`, not a
 listing is public, turn it into a link in both homepages:
 
 ```html
-<a class="store-badge" href="https://play.google.com/store/apps/details?id=com.aigameinnovation.hearthbound">
+<a class="store-badge" href="https://play.google.com/store/apps/details?id=com.mz.htbd">
   <span><small>Get it on</small><strong>Google Play</strong></span></a>
 ```
 
