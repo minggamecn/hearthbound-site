@@ -37,6 +37,8 @@ Everything in `assets/` comes from the game repository:
 - `icon-*.png`, `apple-touch-icon.png`, `favicon-32.png`: `store/art/app_icon.png`.
 - `shots/*.webp`: smoke-test screenshots (`build/smoke/*-iphone-390x844-*.png`), 600 px wide.
   The `-zh` shots are the Chinese build's; the homestead and defence shots exist only in English.
+- `shots/autumn*.webp`, `shots/winter*.webp`: the store colony (`tools/store/colony.ts` in the game) in autumn
+  and winter, captured by `tools/season-shots.mjs` with the game's `?season=` preview into the game's `build/site/`.
 - `settlers/settler-NN.webp`: the first (content) frame of `por_settler_NN`.
 - `art/*.webp`: the `ill_biome_*`, `ill_event_*` and `ill_chronicle_*` banners.
 
@@ -44,6 +46,7 @@ Rebuild them after the art or the screenshots change (needs Pillow; the screensh
 the game's last `npm run smoke`):
 
 ```sh
+node tools/season-shots.mjs              # after a web build and tools/store/colony.ts in the game
 python tools/make-images.py            # reads ../sims; or pass the game repository's path
 ```
 

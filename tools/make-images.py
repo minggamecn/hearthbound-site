@@ -1,4 +1,4 @@
-﻿"""Make the Hearthbound site's images from the game's own art and smoke screenshots."""
+"""Make the Hearthbound site's images from the game's own art and smoke screenshots."""
 import sys
 from pathlib import Path
 from PIL import Image
@@ -56,6 +56,9 @@ SHOTS = {
     "region-zh": "zh-iphone-390x844-8-region.png",
     "chronicle-zh": "zh-iphone-390x844-13-chronicle.png",
 }
+# The seasons, from tools/season-shots.mjs (same size).
+for key in ("autumn", "winter", "autumn-zh", "winter-zh"):
+    SHOTS[key] = SIMS / "build/site" / f"{key}.png"
 for key, file in SHOTS.items():
     img = Image.open(SMOKE / file).convert("RGB")
     w = 600
