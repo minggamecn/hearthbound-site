@@ -39,7 +39,13 @@ const browser = await chromium.launch({ executablePath: process.env.HB_BROWSER ?
 for (const lang of ['en', 'zh-Hans']) {
     for (const shot of SHOTS) {
         const context = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, locale: lang === 'en' ? 'en-US' : 'zh-CN' });
-        await context.addInitScript((text) => { localStorage.clear(); localStorage.setItem('hearthbound.save.1', text); }, readFileSync(join(SAVES, `${shot.save}.json`), 'utf8'));
+        await context.addInitScript((text) => {
+            localStorage.clear();
+            localStorage.setItem('hearthbound.save.1', text);
+            // The game's guide (sims docs/GUIDE.md): no tip, advice, welcome or "what's new" line over the shots.
+            localStorage.setItem('hearthbound.settings', JSON.stringify({ tips: false, advice: false }));
+            localStorage.setItem('hearthbound.guide.1', JSON.stringify({ seen: [], welcomed: true }));
+        }, readFileSync(join(SAVES, `${shot.save}.json`), 'utf8'));
         const page = await context.newPage();
         page.on('pageerror', (e) => console.log(`page error: ${e.message}`));
         await page.goto(`${url}?lang=${lang}&season=${shot.season}`);
